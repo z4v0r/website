@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black & Brown Bakers | Premium Artisanal Bakery Hyderabad</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lenis Smooth Scroll CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css">
+
+    <style>
+        :root {
+            --bg-primary: #0a0908;
+            --bg-secondary: #141210;
+            --bg-card: #1c1917;
+            --accent-gold: #c5a880;
+            --accent-gold-light: #e2cca8;
+            --text-main: #f5f2eb;
+            --text-muted: #a8a29e;
+            --border-color: rgba(197, 168, 128, 0.15);
+            --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Scroll Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+            z-index: 10000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 9, 8, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: padding 0.3s var(--transition-smooth);
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            background: rgba(10, 9, 8, 0.95);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .badge-247 {
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            overflow: hidden;
+        }
+
+        #webgl-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin-top: 4rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: 1.05;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .hero-title .line {
+            display: block;
+            transform: translateY(100px);
+            opacity: 0;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.4s var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-gold);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(197, 168, 128, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Marquee Bar */
+        .marquee-section {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            padding: 0 2rem;
+            letter-spacing: 2px;
+        }
+
+        .marquee-item span {
+            color: var(--accent-gold);
+            margin-left: 2rem;
+            font-size: 1rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* About Section */
+        .section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: transform 1.2s var(--transition-smooth);
+        }
+
+        .about-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Products / Services Section */
+        .products-section {
+            background-color: var(--bg-secondary);
+            padding: 8rem 5%;
+        }
+
+        .products-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.5s var(--transition-smooth), border-color 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(197, 168, 128, 0.1);
+        }
+
+        .product-img-container {
+            height: 280px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--transition-smooth);
+        }
+
+        .product-card:hover .product-img-container img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2.5rem;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .product-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .product-link:hover {
+            gap: 10px;
+        }
+
+        /* Why Choose Us Section */
+        .features-section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            border-radius: 8px;
+            transition: transform 0.5s var(--transition-smooth), border-color 0.5s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Experience Cinematic Banner */
+        .banner-section {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            margin: 4rem 0;
+        }
+
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .banner-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .banner-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: var(--bg-secondary);
+            padding: 8rem 5%;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 5rem auto 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-quote {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .testimonial-author h4 {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-author p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info-item h4 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-item p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 4rem;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
+            border-radius: 6px;
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 6rem 5% 3rem 5%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto 5rem auto;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media(max-width: 1024px) {
+            .about-grid, .contact-grid, .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .features-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-primary);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent-gold);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">BLACK & BROWN <span>BAKERS</span></a>
+        <ul class="nav-links">
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#products" class="nav-link">Masterpieces</a></li>
+            <li><a href="#why-us" class="nav-link">Legacy</a></li>
+            <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+            <li><a href="#contact" class="nav-link">Branches</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <div class="badge-247">Open 24/7</div>
+            <button class="hamburger" id="hamburger-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-close-btn">&times;</button>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#products" class="mobile-link">Masterpieces</a>
+        <a href="#why-us" class="mobile-link">Legacy</a>
+        <a href="#testimonials" class="mobile-link">Reviews</a>
+        <a href="#contact" class="mobile-link">Branches</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="webgl-container"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">Hyderabad's Premier 24/7 Bakery Chain</span>
+            <h1 class="hero-title">
+                <span class="line">Artisanal Mastery</span>
+                <span class="line">Baked Around The Clock</span>
+            </h1>
+            <p class="hero-description">
+                Operating across 20 state-of-the-art branches in Hyderabad, Sindh. Delivering handcrafted viennoiserie, celebration cakes, and culinary perfection day and night.
+            </p>
+            <div class="hero-cta">
+                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="#contact" class="btn btn-secondary">Find 24/7 Branch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Bar -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item">20 Branches Across Hyderabad <span>✦</span></div>
+            <div class="marquee-item">Open 24 Hours, 7 Days A Week <span>✦</span></div>
+            <div class="marquee-item">Artisanal Pastries & Cakes <span>✦</span></div>
+            <div class="marquee-item">Uncompromising Quality <span>✦</span></div>
+            <div class="marquee-item">20 Branches Across Hyderabad <span>✦</span></div>
+            <div class="marquee-item">Open 24 Hours, 7 Days A Week <span>✦</span></div>
+            <div class="marquee-item">Artisanal Pastries & Cakes <span>✦</span></div>
+            <div class="marquee-item">Uncompromising Quality <span>✦</span></div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-grid">
+            <div class="about-image-wrapper">
+                <img src="images/21bddd24-d764-4485-9663-020fe8855769.png" alt="Black & Brown Bakers Luxury Interior & Display">
+            </div>
+            <div class="about-content">
+                <div class="section-header">
+                    <span class="section-tag">Our Heritage</span>
+                    <h2 class="section-title">Where Tradition Meets Cinematic Baking</h2>
+                </div>
+                <p class="section-desc">
+                    Black & Brown Bakers has redefined the culinary landscape of Hyderabad, Sindh. With a relentless dedication to premium ingredients, immaculate presentation, and absolute round-the-clock accessibility, we serve moments of joy across 20 signature locations.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>20</h3>
+                        <p>Branches</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Always Open</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Artisanal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products / Masterpieces -->
+    <section id="products" class="products-section">
+        <div class="products-header">
+            <span class="section-tag">Signature Creations</span>
+            <h2 class="section-title">Baked to Perfection</h2>
+            <p class="section-desc">Every pastry, cake, and artisanal loaf is crafted with uncompromising precision by our master pastry chefs.</p>
+        </div>
+        <div class="products-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="images/32b5cb37-69cc-4c85-bf0b-9e18de3f06c4.png" alt="Royal Truffle Gateau">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Signature Cake</span>
+                    <h3 class="product-title">Royal Truffle Gateau</h3>
+                    <p class="product-desc">Rich Belgian dark chocolate layers infused with subtle espresso ganache, coated in a flawless mirror glaze.</p>
+                    <div class="product-footer">
+                        <span class="product-price">Rs. 2,400</span>
+                        <a href="#contact" class="product-link">Order Now <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="images/6a31527e-e125-4b22-b864-ac29fbd92352.png" alt="Artisanal Bakery Display">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Viennoiserie & Breads</span>
+                    <h3 class="product-title">Golden Butter Croissants</h3>
+                    <p class="product-desc">Laminated French butter pastry baked fresh hourly at all 20 branches, featuring a delicate honeycomb crumb.</p>
+                    <div class="product-footer">
+                        <span class="product-price">Rs. 250</span>
+                        <a href="#contact" class="product-link">Order Now <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="images/d6e02629-6fe0-4120-b14a-05af8dcbd910.png" alt="Celebration & Custom Sweets">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Celebration Confectionery</span>
+                    <h3 class="product-title">Velvet Berry Praline</h3>
+                    <p class="product-desc">Light vanilla chiffon layered with fresh seasonal berries and white chocolate praline crunch.</p>
+                    <div class="product-footer">
+                        <span class="product-price">Rs. 2,800</span>
+                        <a href="#contact" class="product-link">Order Now <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" class="features-section">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <span class="section-tag">The Standard</span>
+            <h2 class="section-title">Why Hyderabad Chooses Us</h2>
+            <p class="section-desc">We combine traditional baking heritage with modern technological efficiency to deliver an unmatched culinary experience.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✦</div>
+                <h3 class="feature-title">24/7 Availability</h3>
+                <p class="feature-desc">Midnight cravings or early morning breakfast meetings—all 20 branches remain fully operational around the clock.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✦</div>
+                <h3 class="feature-title">20 Strategic Branches</h3>
+                <p class="feature-desc">Conveniently located across prime commercial and residential sectors of Hyderabad, Sindh for instant access.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✦</div>
+                <h3 class="feature-title">Uncompromising Quality</h3>
+                <p class="feature-desc">Imported French butters, finest Belgian chocolates, and locally sourced organic ingredients in every single bite.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cinematic Banner -->
+    <section class="banner-section">
+        <div class="banner-bg">
+            <img src="images/6a31527e-e125-4b22-b864-ac29fbd92352.png" alt="Cinematic Bakery Interior">
+        </div>
+        <div class="banner-content">
+            <span class="section-tag">Experience Excellence</span>
+            <h2 class="section-title banner-title">Freshly Baked, Every Single Hour</h2>
+            <a href="#contact" class="btn btn-primary">Visit Nearest Branch Today</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials-section">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="section-title">Words from Our Patrons</h2>
+            <p class="section-desc">Discover why Black & Brown Bakers is Hyderabad's most beloved culinary institution.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"Ordering a custom birthday cake at 3 AM seemed impossible until I found Black & Brown Bakers. The taste and presentation blew everyone away!"</p>
+                <div class="testimonial-author">
+                    <h4>Dr. Sarah Ahmed</h4>
+                    <p>Hyderabad Resident</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"Their croissants are authentically flaky and buttery. Being open 24/7 means my early morning team meetings always have fresh gourmet pastries."</p>
+                <div class="testimonial-author">
+                    <h4>Fahad Qureshi</h4>
+                    <p>Corporate Executive</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"The ambiance at their main branch is stunning, and the royal truffle gateau is an absolute masterpiece of flavor. Truly award-winning."</p>
+                <div class="testimonial-author">
+                    <h4>Ayesha Malik</h4>
+                    <p>Food Critic</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Branches -->
+    <section id="contact" class="contact-section">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <span class="section-tag">Get in Touch</span>
+            <h2 class="section-title">Connect With Our Branches</h2>
+            <p class="section-desc">Have a custom order inquiry or need directions to one of our 20 24/7 branches across Hyderabad? Reach out below.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3 class="serif-font" style="font-size: 2rem; margin-bottom: 1.5rem;">Hyderabad Headquarters</h3>
+                <p class="section-desc">Serving the city across 20 distinct locations with lightning-fast delivery and round-the-clock dine-in and take-away services.</p>
+                
+                <div class="contact-info-list">
+                    <div class="contact-info-item">
+                        <h4>Main Boulevard Branch</h4>
+                        <p>Auto Bahn Road, Unit No. 3, Hyderabad, Sindh</p>
+                    </div>
+                    <div class="contact-info-item">
+                        <h4>Operating Hours</h4>
+                        <p>Open 24 Hours / 7 Days a Week</p>
+                    </div>
+                    <div class="contact-info-item">
+                        <h4>Direct Line</h4>
+                        <p>+92 (22) 111-247-999</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <form class="contact-form" id="inquiry-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Your Message or Custom Order Request" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 1.5rem; display: inline-flex;">BLACK & BROWN <span>BAKERS</span></a>
+                <p>Hyderabad's premier 24/7 artisanal bakery chain operating 20 branches across the city. Uncompromising quality, exquisite taste, and round-the-clock availability.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Masterpieces</a></li>
+                    <li><a href="#why-us">Our Legacy</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Masterpieces</h4>
+                <ul class="footer-links">
+                    <li><a href="#products">Royal Truffle Gateau</a></li>
+                    <li><a href="#products">Butter Croissants</a></li>
+                    <li><a href="#products">Velvet Berry Praline</a></li>
+                    <li><a href="#products">Custom Celebration Cakes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hyderabad Network</h4>
+                <p>20 active branches providing 24/7 service across Auto Bahn, Saddar, Qasimabad, Latifabad, and beyond.</p>
+                <p style="color: var(--accent-gold); font-weight: 600;">Always Open for You.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> Black & Brown Bakers, Hyderabad, Sindh. All rights reserved.</p>
+            <p>Designed with Cinematic 3D & GSAP</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+    <script>
+        // Footer Year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Lenis Smooth Scrolling
+        let lenis;
+        try {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Integrate Lenis with GSAP ScrollTrigger
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+        } catch(e) {
+            console.log('Lenis failed to load, falling back to standard scroll.');
+        }
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+            
+            const nav = document.getElementById('navbar');
+            if(winScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Three.js Hero 3D Background
+        try {
+            const container = document.getElementById('webgl-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Create floating geometric particles/shapes
+            const geometryGroup = new THREE.Group();
+            scene.add(geometryGroup);
+
+            const geometries = [
+                new THREE.IcosahedronGeometry(1, 0),
+                new THREE.BoxGeometry(1.2, 1.2, 1.2),
+                new THREE.OctahedronGeometry(1.2, 0)
+            ];
+
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xc5a880,
+                wireframe: true,
+                roughness: 0.4,
+                metalness: 0.8
+            });
+
+            const meshCount = 15;
+            const meshes = [];
+
+            for(let i = 0; i < meshCount; i++) {
+                const geom = geometries[Math.floor(Math.random() * geometries.length)];
+                const mesh = new THREE.Mesh(geom, material);
+                
+                mesh.position.set(
+                    (Math.random() - 0.5) * 15,
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10 - 5
+                );
+                
+                const scale = Math.random() * 0.8 + 0.5;
+                mesh.scale.set(scale, scale, scale);
+                
+                geometryGroup.add(mesh);
+                meshes.push(mesh);
+            }
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xc5a880, 2);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            camera.position.z = 6;
+
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            window.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+                mouseY = (event.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+            });
+
+            // Animation Loop
+            const clock = new THREE.Clock();
+            function animate3D() {
+                requestAnimationFrame(animate3D);
+                
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+
+                geometryGroup.rotation.x = targetY * 0.5;
+                geometryGroup.rotation.y = targetX * 0.5;
+
+                const elapsedTime = clock.getElapsedTime();
+                meshes.forEach((mesh, index) => {
+                    mesh.rotation.x = elapsedTime * 0.2 + index;
+                    mesh.rotation.y = elapsedTime * 0.3 + index;
+                });
+
+                renderer.render(scene, camera);
+            }
+            animate3D();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        } catch(e) {
+            console.log('WebGL initialization failed, fallback active.');
+        }
+
+        // GSAP Animations & ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const heroTl = gsap.timeline({defaults: {ease: 'power3.out'}});
+        heroTl.to('.hero-subtitle', {opacity: 1, y: 0, duration: 1, delay: 0.2})
+              .to('.hero-title .line', {y: 0, opacity: 1, duration: 1.2, stagger: 0.2}, '-=0.6')
+              .to('.hero-description', {opacity: 1, y: 0, duration: 1}, '-=0.8')
+              .to('.hero-cta', {opacity: 1, y: 0, duration: 1}, '-=0.8');
+
+        // Section Headings & General Elements Staggered Fade Up
+        gsap.utils.toArray('.section').forEach(section => {
+            gsap.from(section.querySelectorAll('.section-header, .about-image-wrapper, .products-grid, .features-grid, .testimonials-grid, .contact-grid'), {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        });
+
+        // 3D Tilt Effect on Cards
+        const cards = document.querySelectorAll('.product-card, .feature-card, .testimonial-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; //x position within card
+                const y = e.clientY - rect.top;  //y position within card
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                gsap.to(card, {
+                    rotationX: rotateX,
+                    rotationY: rotateY,
+                    transformPerspective: 1000,
+                    scale: 1.02,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    rotationX: 0,
+                    rotationY: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                });
+            });
+        });
+
+        // Mobile Menu Toggle
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            if(lenis) lenis.stop();
+        });
+
+        mobileCloseBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            if(lenis) lenis.start();
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                if(lenis) lenis.start();
+            });
+        });
+
+        // Contact Form Submission Handler
+        const inquiryForm = document.getElementById('inquiry-form');
+        inquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = inquiryForm.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Message Sent Successfully!';
+            btn.style.backgroundColor = '#4ade80';
+            btn.style.borderColor = '#4ade80';
+            btn.style.color = '#0a0908';
+            
+            setTimeout(() => {
+                inquiryForm.reset();
+                btn.textContent = originalText;
+                btn.style.backgroundColor = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
