@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison de Glace | Artisan Gelateria & Patisserie | Paris</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDFBF7;
+            --taupe: #EFECE6;
+            --charcoal: #1C1C1C;
+            --gold: #C5A059;
+            --gold-hover: #D4B26F;
+            --accent: #8C7A6B;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--charcoal);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 500;
+            border: 1px solid var(--charcoal);
+            background: transparent;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--charcoal);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn:hover {
+            color: var(--cream);
+            border-color: var(--charcoal);
+        }
+
+        .btn-gold {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--cream);
+        }
+
+        .btn-gold::before {
+            background: var(--charcoal);
+            border-color: var(--charcoal);
+        }
+
+        .btn-gold:hover {
+            border-color: var(--charcoal);
+            color: var(--cream);
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 0;
+            transition: var(--transition);
+            background: linear-gradient(to bottom, rgba(253,251,247,0.9) 0%, rgba(253,251,247,0) 100%);
+        }
+
+        header.scrolled {
+            padding: 1.2rem 0;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--taupe);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+            color: var(--charcoal);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--charcoal);
+            position: absolute;
+            transition: var(--transition);
+        }
+
+        .menu-toggle span:nth-child(1) { top: 0; }
+        .menu-toggle span:nth-child(2) { top: 9px; }
+        .menu-toggle span:nth-child(3) { top: 18px; }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 9px;
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 9px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 5rem;
+            background: radial-gradient(circle at 80% 30%, var(--taupe) 0%, var(--cream) 70%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 6vw, 6rem);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            color: var(--charcoal);
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--accent);
+            max-width: 500px;
+        }
+
+        .hero-image-wrapper {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45vw;
+            height: 70vh;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(105%);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            padding: 10rem 0;
+            background-color: var(--cream);
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            filter: grayscale(10%);
+        }
+
+        .section-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .about p {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- PRODUCTS / SERVICES --- */
+        .products {
+            padding: 10rem 0;
+            background-color: var(--taupe);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 6rem auto;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            margin-top: 0.5rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .product-card {
+            background: var(--cream);
+            padding: 3rem 2.5rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .product-card p {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        /* --- WHY CHOOSE US --- */
+        .features {
+            padding: 10rem 0;
+            background: var(--cream);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .feature-item p {
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        .feature-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            padding: 10rem 0;
+            background-color: var(--charcoal);
+            color: var(--cream);
+            text-align: center;
+        }
+
+        .testimonials .section-subtitle {
+            color: var(--gold);
+        }
+
+        .testimonials h2 {
+            color: var(--cream);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 250px;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .testimonial-slide q {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+            font-style: italic;
+            line-height: 1.4;
+            display: block;
+            margin-bottom: 2rem;
+            quotes: "" "";
+        }
+
+        .testimonial-author {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact {
+            padding: 10rem 0;
+            background: var(--cream);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: flex-start;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .contact-info p {
+            color: var(--accent);
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-detail-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .contact-detail-item p {
+            color: var(--charcoal);
+            margin-bottom: 0;
+        }
+
+        .contact-form {
+            background: var(--taupe);
+            padding: 4rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--accent);
+            color: var(--charcoal);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        textarea.form-control {
+            resize: none;
+            height: 120px;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--gold);
+            display: none;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 5rem 0 3rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: var(--accent);
+            max-width: 300px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .footer-links ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream);
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        /* --- ANIMATIONS ON SCROLL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+            .hero-image-wrapper {
+                display: none;
+            }
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            .hero p {
+                margin: 0 auto 2.5rem auto;
+            }
+            .about-grid, .product-grid, .features-grid, .contact-grid, .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .about-img {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--cream);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .contact-form {
+                padding: 2rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Maison de Glace</a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about">L'Atelier</a></li>
+                    <li><a href="#products">Collection</a></li>
+                    <li><a href="#heritage">Héritage</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <span class="section-subtitle">Artisan Gelateria & Patisserie</span>
+                <h1>Poetry in <span>Frozen</span> Form.</h1>
+                <p>Handcrafted in the heart of Paris using time-honored French culinary traditions, rare single-origin chocolates, and locally foraged seasonal ingredients.</p>
+                <a href="#products" class="btn btn-gold">Explore Collection</a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=85" alt="Artisanal ice cream creation">
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=85" alt="Chef preparing pastry" class="about-img">
+                </div>
+                <div class="reveal">
+                    <span class="section-subtitle">Our Philosophy</span>
+                    <h2>A Symphony of Uncompromising Quality</h2>
+                    <p>Founded by Maître Glacier Jean-Luc Moreau, Maison de Glace approaches frozen dessert not as a treat, but as an elevated canvas of gastronomy. Every batch is spun in micro-quantities daily to achieve a velvety texture that defies conventional standards.</p>
+                    <p>We source our pistachios exclusively from Bronte, Sicily, our vanilla beans from small-scale plantations in Madagascar, and our dairy fresh from organic pastures in Normandy.</p>
+                    <a href="#contact" class="btn" style="margin-top: 1rem;">Reserve a Tasting</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS / SERVICES SECTION -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">The Menu</span>
+                <h2>Seasonal Masterpieces</h2>
+            </div>
+            <div class="product-grid">
+                <div class="product-card reveal">
+                    <h3>Madagascan Vanilla Bean & Fleur de Sel</h3>
+                    <p>Infused with triple-folded organic Bourbon vanilla pods, finished with subtle flakes of hand-harvested Guérande salt.</p>
+                    <span class="price">€12.00 / Pint</span>
+                </div>
+                <div class="product-card reveal">
+                    <h3>Valrhona Dark Chocolate Sorbet</h3>
+                    <p>A daringly rich, dairy-free formulation utilizing 85% Guanaja single-origin chocolate from Valrhona.</p>
+                    <span class="price">€14.00 / Pint</span>
+                </div>
+                <div class="product-card reveal">
+                    <h3>Sicily Pistachio & Orange Blossom</h3>
+                    <p>Roasted Bronte pistachio paste folded into sweet cream with a whisper of organic distilled Moroccan orange blossom water.</p>
+                    <span class="price">€15.00 / Pint</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="features" id="heritage">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">The Difference</span>
+                <h2>Crafted Without Compromise</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item reveal">
+                    <span class="feature-number">01</span>
+                    <h3>Micro-Batch Spun</h3>
+                    <p>Produced exclusively in quantities under ten liters to maintain absolute control over texture, overrun, and temperature profiling.</p>
+                </div>
+                <div class="feature-item reveal">
+                    <span class="feature-number">02</span>
+                    <h3>100% Traceable</h3>
+                    <p>We work directly with generational farmers and ethical growers who share our uncompromising dedication to the earth and harvest.</p>
+                </div>
+                <div class="feature-item reveal">
+                    <span class="feature-number">03</span>
+                    <h3>Pure Composition</h3>
+                    <p>Free from artificial stabilizers, emulsifiers, and synthetic colorants. What you taste is simply the raw integrity of the ingredient.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="container">
+            <span class="section-subtitle">Accolades</span>
+            <h2>Words from Connoisseurs</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <q>&ldquo;Maison de Glace has fundamentally redefined what frozen dessert can achieve. The texture is a miraculous revelation.&rdquo;</q>
+                    <span class="testimonial-author">Le Guide Culinaire Paris</span>
+                </div>
+                <div class="testimonial-slide">
+                    <q>&ldquo;An exquisite temple of flavor. The Madagascar Vanilla and Fleur de Sel is quite simply the finest scoop in Europe.&rdquo;</q>
+                    <span class="testimonial-author">Gastronomie & Vins Magazine</span>
+                </div>
+                <div class="testimonial-slide">
+                    <q>&ldquo;A breathtaking sensory experience. Jean-Luc Moreau is an absolute artist working in cream and sugar.&rdquo;</q>
+                    <span class="testimonial-author">The International Dessert Journal</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <span class="section-subtitle">Inquiries & Reservations</span>
+                    <h2>Experience the Atelier</h2>
+                    <p>We welcome private tastings, bespoke event commissions, and daily reservations at our Paris salon. Please reach out via the form or our direct coordinates.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <h4>Location</h4>
+                            <p>14 Rue de Castiglione, 75001 Paris, France</p>
+                        </div>
+                        <div class="contact-detail-item">
+                            <h4>Hours</h4>
+                            <p>Tuesday – Sunday: 1:00 PM – 9:00 PM</p>
+                        </div>
+                        <div class="contact-detail-item">
+                            <h4>Direct</h4>
+                            <p>+33 1 42 68 00 00 | contact@maisondeglace.fr</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form reveal">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Inquiry / Reservation Details" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold" style="width: 100%;">Send Message</button>
+                        <div class="form-message" id="formMessage">Thank you. Your message has been received with gratitude.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">Maison de Glace</a>
+                    <p>Purveyors of ultra-premium artisanal frozen confections, hand-spun daily in Paris, France.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#about">L'Atelier</a></li>
+                        <li><a href="#products">Collection</a></li>
+                        <li><a href="#heritage">Héritage</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Mentions Légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Maison de Glace. All Rights Reserved.</p>
+                <p>Designed with uncompromising precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Testimonial Carousel Auto-Rotation
+        const slides = document.querySelectorAll('.testimonial-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        if (slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
+
+        // Working Contact Form Simulation
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate network request
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Sending...';
+            
+            setTimeout(() => {
+                submitBtn.textContent = 'Message Sent';
+                submitBtn.style.background = '#2c5e3b';
+                submitBtn.style.borderColor = '#2c5e3b';
+                formMessage.style.display = 'block';
+                contactForm.reset();
+            }, 1000);
+        });
+
+        // Dynamic Copyright Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
